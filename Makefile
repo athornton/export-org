@@ -24,10 +24,13 @@ pdf: example.pdf
 html: example.html
 
 site: pdf html
-	@mkdir -p ./site
+	@mkdir -p ./site/assets
 	cp example.html ./site/index.html
 	cp example.pdf ./site/example.pdf
 	cp -rp local.css ./site
+	cp -rp Makefile ./site/assets
+	cp -rp .github/workflows/ci.yaml ./site/assets
+	cp -rp scripts/fix-texlive.bash ./site/assets
 
 clean:
 	@rm -rf ./site

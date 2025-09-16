@@ -55,3 +55,26 @@ I don't care about "plain" HTML export--if I am exporting to HTML, what I want i
 
 I go a little farther and create a GitHub Actions workflow to allow publication straight to GitHub Pages.
 
+*** GitHub Action integration
+
+The trick here is getting both local builds and GitHub Actions to work correctly and cache built containers.
+
+In [[./assets/ci.yaml][the GitHub CI YAML]] you will see that the Docker =Build container= step caches to and from GHA, and also uses =--load= to make the image available to susbsequent steps.
+
+In [[./assets/Makefile][the Makefile]] the =docker-container= target tries to use the target container to run a trivial command; if it fails it builds that container.
+
+That ensures that, if building locally, you build the container (which is never pushed) unless it's already in your local Docker environment.
+If building via GitHub Actions, you will at that point have the container because it will have been built or retrieved from cache and then stored in Docker by =Build container=.
+
+** PDF Export
+
+Generating PDF output from org-mode is straightforward, at least in the sense that generating LaTeX from org-mode is easy.
+
+In theory, once you have a working LaTeX installation, generating a PDF from that is easy.
+In practice, that "once you have" is doing a lot of load bearing.
+Fortunately, this is what containerization is for.
+
+Don't look at [[./assets/fix-texlive.bash][how to fix up the installed TeX]].
+
+On the bright side, [[./example.pdf][the PDF version]] looks OK.
+
