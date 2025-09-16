@@ -3,7 +3,7 @@
 #+OPTIONS: toc:nil num:nil
 #+REVEAL_HLEVEL: 1
 #+REVEAL_THEME: white
-#+REVEAL_EXTRA_CSS: ./local.css
+#+REVEAL_EXTRA_CSS: ./css/local.css
 #+REVEAL_INIT_OPTIONS: slideNumber: "h/v"
 #+REVEAL_PLUGINS: (highlight)
 #+LATEX_COMPILER: lualatex
@@ -27,9 +27,13 @@ It was also pretty manual.
 
 Emacs has had a batch mode forever (as far as I know, anyway).
 
+Clever use of =--load= and =--eval= let you turn Emacs into a batch transmogrifier.
+
+*** Why Emacs 30?
+
 Emacs 30 lets you use a shebang to treat eshell just like any other shell script.
 I thought this was going to be useful, but it turned out not to be.
-But if you wondered why this was built on Debian testing (in September 2025), "Emacs 30" is the answer.
+But if you wondered why this container was built on Debian testing (in September 2025), "Emacs 30" is the answer.
 
 ** Automating artifact generation
 
@@ -77,4 +81,11 @@ Fortunately, this is what containerization is for.
 Don't look at [[./assets/fix-texlive.bash][how to fix up the installed TeX]].
 
 On the bright side, [[./example.pdf][the PDF version]] looks OK.
+
+** Source Code
+
+This project lives at [[https://github.com/athornton/export-org][GitHub]].
+
+I may at some point make it into a template project, but for now, all you really need to do is clone it and then replace the org document with your own.
+Fix up the =Makefile= and modify the CSS as you like, and then =make site= (which is also used as the CI check) will do the trick.
 
