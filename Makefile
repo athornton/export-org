@@ -1,3 +1,5 @@
+container = athornton/export-org:latest
+
 .PHONY: help
 help:
 	@echo "Make targets for export-org example"
@@ -8,7 +10,8 @@ help:
 
 .PHONY: docker-container
 docker-container:
-	docker build -t athornton/export-org .
+	docker run --rm $(container) /bin/true || \
+	docker buildx build -t $(container) .
 
 example.pdf: example.org docker-container
 	./exporter.sh pdf example.org
