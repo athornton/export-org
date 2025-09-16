@@ -1,0 +1,12 @@
+.reveal {
+    font-family: Verdana, Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-size: x-large;
+}
+
+.reveal p {
+    text-align: left;
+}
+
+.reveal div.figure p {
+    text-align: center;
+}
