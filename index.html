@@ -30,11 +30,11 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h1 class="title">Org-mode export to Reveal.js and PDF</h1><p class="subtitle"></p>
-<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-16 Tue 20:18</p>
+<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-16 Tue 22:14</p>
 </section>
 <section>
-<section id="slide-org0890dbe">
-<h2 id="org0890dbe">Org-mode export to Reveal.js and PDF</h2>
+<section id="slide-orgbaac9c7">
+<h2 id="orgbaac9c7">Org-mode export to Reveal.js and PDF</h2>
 <p>
 If you're me, you think better in a text editor than in Powerpoint.
 </p>
@@ -47,8 +47,8 @@ A few years ago I ran across <a href="https://github.com/yjwen/org-reveal">org-r
 It was also pretty manual.
 </p>
 </section>
-<section id="slide-orgd581f58">
-<h3 id="orgd581f58">Automating Emacs</h3>
+<section id="slide-org3abc1a4">
+<h3 id="org3abc1a4">Automating Emacs</h3>
 <p>
 Emacs has had a batch mode forever (as far as I know, anyway).
 </p>
@@ -59,8 +59,8 @@ I thought this was going to be useful, but it turned out not to be.
 But if you wondered why this was built on Debian testing (in September 2025), "Emacs 30" is the answer.
 </p>
 </section>
-<section id="slide-orgcf3775d">
-<h3 id="orgcf3775d">Automating artifact generation</h3>
+<section id="slide-orgb571c0f">
+<h3 id="orgb571c0f">Automating artifact generation</h3>
 <p>
 In essence all you need to do for Reveal.js is to ensure that org-reveal-mode is available.
 For PDF output you need LaTeX and an org-mode new enough to support LaTeX output.
@@ -70,8 +70,8 @@ For PDF output you need LaTeX and an org-mode new enough to support LaTeX output
 Then you just call the appropriate export function once you've loaded your org document into the buffer.
 </p>
 </section>
-<section id="slide-orgcbcbf6a">
-<h3 id="orgcbcbf6a">Ensuring you have that support</h3>
+<section id="slide-org46f5287">
+<h3 id="org46f5287">Ensuring you have that support</h3>
 <p>
 The problem is, no one's CI runner is going to have Emacs with a new org-mode and org-reveal preloaded.
 </p>
@@ -84,8 +84,8 @@ The obvious thing to do is to build a container with Emacs and a LaTeX setup and
 And the great news is, this has already been (mostly) done by <a href="https://gitlab.com/olberger/docker-org-teaching-export">Olivier Berger</a>.
 </p>
 </section>
-<section id="slide-orgbd1e7ff">
-<h4 id="orgbd1e7ff">Differences from Berger's work</h4>
+<section id="slide-org99ee83c">
+<h4 id="org99ee83c">Differences from Berger's work</h4>
 <p>
 Berger uses Emacs with X enabled, because he prefers those fonts, and goes to some trouble to avoid running Emacs in batch mode.
 I don't care: I just get Verdana into the container and set up my PDF export to use it.
@@ -97,6 +97,45 @@ I don't care about "plain" HTML export&#x2013;if I am exporting to HTML, what I 
 
 <p>
 I go a little farther and create a GitHub Actions workflow to allow publication straight to GitHub Pages.
+</p>
+</section>
+<section id="slide-orga60b697">
+<h4 id="orga60b697">GitHub Action integration</h4>
+<p>
+The trick here is getting both local builds and GitHub Actions to work correctly and cache built containers.
+</p>
+
+<p>
+In <a href="./assets/ci.yaml">the GitHub CI YAML</a> you will see that the Docker <code>Build container</code> step caches to and from GHA, and also uses <code>--load</code> to make the image available to susbsequent steps.
+</p>
+
+<p>
+In <a href="./assets/Makefile">the Makefile</a> the <code>docker-container</code> target tries to use the target container to run a trivial command; if it fails it builds that container.
+</p>
+
+<p>
+That ensures that, if building locally, you build the container (which is never pushed) unless it's already in your local Docker environment.
+If building via GitHub Actions, you will at that point have the container because it will have been built or retrieved from cache and then stored in Docker by <code>Build container</code>.
+</p>
+</section>
+<section id="slide-org1176f68">
+<h3 id="org1176f68">PDF Export</h3>
+<p>
+Generating PDF output from org-mode is straightforward, at least in the sense that generating LaTeX from org-mode is easy.
+</p>
+
+<p>
+In theory, once you have a working LaTeX installation, generating a PDF from that is easy.
+In practice, that "once you have" is doing a lot of load bearing.
+Fortunately, this is what containerization is for.
+</p>
+
+<p>
+Don't look at <a href="./assets/fix-texlive.bash">how to fix up the installed TeX</a>.
+</p>
+
+<p>
+On the bright side, <a href="./example.pdf">the PDF version</a> looks OK.
 </p>
 </section>
 </section>
