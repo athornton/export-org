@@ -25,9 +25,10 @@ html: example.html
 
 site: pdf html
 	@mkdir -p ./site/assets
+	@mkdir -p ./site/css
 	cp example.html ./site/index.html
 	cp example.pdf ./site/example.pdf
-	cp -rp local.css ./site
+	cp -rp css/local.css ./site/css
 	cp -rp Makefile ./site/assets
 	cp -rp .github/workflows/ci.yaml ./site/assets
 	cp -rp scripts/fix-texlive.bash ./site/assets
