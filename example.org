@@ -1,0 +1,57 @@
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_PLUGINS: (highlight)
+#+OPTIONS: toc:nil num:nil
+#+REVEAL_HLEVEL: 1
+#+REVEAL_THEME: white
+#+REVEAL_EXTRA_CSS: ./local.css
+#+REVEAL_INIT_OPTIONS: slideNumber: "h/v"
+#+REVEAL_PLUGINS: (highlight)
+#+LATEX_COMPILER: lualatex
+#+LATEX_CLASS_OPTIONS: [10pt]
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setsansfont{Verdana}
+#+LATEX_HEADER: \setmainfont{Verdana}
+#+AUTHOR: Adam Thornton
+#+EMAIL: athornton@gmail.com
+#+TITLE: Org-mode export to Reveal.js and PDF
+
+* Org-mode export to Reveal.js and PDF
+
+If you're me, you think better in a text editor than in Powerpoint.
+
+A few years ago I ran across [[https://github.com/yjwen/org-reveal][org-reveal]].  It was revelatory.
+
+It was also pretty manual.
+
+** Automating Emacs
+
+Emacs has had a batch mode forever (as far as I know, anyway).
+
+Emacs 30 lets you use a shebang to treat eshell just like any other shell script.
+I thought this was going to be useful, but it turned out not to be.
+But if you wondered why this was built on Debian testing (in September 2025), "Emacs 30" is the answer.
+
+** Automating artifact generation
+
+In essence all you need to do for Reveal.js is to ensure that org-reveal-mode is available.
+For PDF output you need LaTeX and an org-mode new enough to support LaTeX output.
+
+Then you just call the appropriate export function once you've loaded your org document into the buffer.
+
+** Ensuring you have that support
+
+The problem is, no one's CI runner is going to have Emacs with a new org-mode and org-reveal preloaded.
+
+The obvious thing to do is to build a container with Emacs and a LaTeX setup and run it via Docker (or podman).
+
+And the great news is, this has already been (mostly) done by [[https://gitlab.com/olberger/docker-org-teaching-export][Olivier Berger]].
+
+*** Differences from Berger's work
+
+Berger uses Emacs with X enabled, because he prefers those fonts, and goes to some trouble to avoid running Emacs in batch mode.
+I don't care: I just get Verdana into the container and set up my PDF export to use it.
+
+I don't care about "plain" HTML export--if I am exporting to HTML, what I want is Reveal.js.
+
+I go a little farther and create a GitHub Actions workflow to allow publication straight to GitHub Pages.
+
