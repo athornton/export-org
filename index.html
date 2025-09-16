@@ -30,11 +30,11 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h1 class="title">Org-mode export to Reveal.js and PDF</h1><p class="subtitle"></p>
-<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-16 Tue 20:14</p>
+<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-16 Tue 20:18</p>
 </section>
 <section>
-<section id="slide-orgb3d3729">
-<h2 id="orgb3d3729">Org-mode export to Reveal.js and PDF</h2>
+<section id="slide-org0890dbe">
+<h2 id="org0890dbe">Org-mode export to Reveal.js and PDF</h2>
 <p>
 If you're me, you think better in a text editor than in Powerpoint.
 </p>
@@ -47,8 +47,8 @@ A few years ago I ran across <a href="https://github.com/yjwen/org-reveal">org-r
 It was also pretty manual.
 </p>
 </section>
-<section id="slide-org7202594">
-<h3 id="org7202594">Automating Emacs</h3>
+<section id="slide-orgd581f58">
+<h3 id="orgd581f58">Automating Emacs</h3>
 <p>
 Emacs has had a batch mode forever (as far as I know, anyway).
 </p>
@@ -59,8 +59,8 @@ I thought this was going to be useful, but it turned out not to be.
 But if you wondered why this was built on Debian testing (in September 2025), "Emacs 30" is the answer.
 </p>
 </section>
-<section id="slide-org55239c7">
-<h3 id="org55239c7">Automating artifact generation</h3>
+<section id="slide-orgcf3775d">
+<h3 id="orgcf3775d">Automating artifact generation</h3>
 <p>
 In essence all you need to do for Reveal.js is to ensure that org-reveal-mode is available.
 For PDF output you need LaTeX and an org-mode new enough to support LaTeX output.
@@ -70,8 +70,8 @@ For PDF output you need LaTeX and an org-mode new enough to support LaTeX output
 Then you just call the appropriate export function once you've loaded your org document into the buffer.
 </p>
 </section>
-<section id="slide-orgb3a833b">
-<h3 id="orgb3a833b">Ensuring you have that support</h3>
+<section id="slide-orgcbcbf6a">
+<h3 id="orgcbcbf6a">Ensuring you have that support</h3>
 <p>
 The problem is, no one's CI runner is going to have Emacs with a new org-mode and org-reveal preloaded.
 </p>
@@ -84,8 +84,8 @@ The obvious thing to do is to build a container with Emacs and a LaTeX setup and
 And the great news is, this has already been (mostly) done by <a href="https://gitlab.com/olberger/docker-org-teaching-export">Olivier Berger</a>.
 </p>
 </section>
-<section id="slide-orgd72da98">
-<h4 id="orgd72da98">Differences from Berger's work</h4>
+<section id="slide-orgbd1e7ff">
+<h4 id="orgbd1e7ff">Differences from Berger's work</h4>
 <p>
 Berger uses Emacs with X enabled, because he prefers those fonts, and goes to some trouble to avoid running Emacs in batch mode.
 I don't care: I just get Verdana into the container and set up my PDF export to use it.
