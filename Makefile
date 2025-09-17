@@ -31,7 +31,7 @@ site: pdf html
 	cp $(target).html ./site/index.html
 	cp $(target).pdf ./site/$(target).pdf
 	cp -rp css ./site
-	cp -rp assets ./site
+	cp -rp assets/coffee.png ./site/assets/coffee.png
 	cp -p Makefile ./site/assets
 	cp -p .github/workflows/ci.yaml ./site/assets
 	cp -p scripts/fix-texlive.bash ./site/assets
