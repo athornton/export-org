@@ -1,11 +1,9 @@
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
-#+REVEAL_PLUGINS: (highlight)
 #+OPTIONS: toc:nil num:nil
 #+REVEAL_HLEVEL: 1
 #+REVEAL_THEME: white
 #+REVEAL_EXTRA_CSS: ./css/local.css
 #+REVEAL_INIT_OPTIONS: slideNumber: "h/v"
-#+REVEAL_PLUGINS: (highlight)
 #+LATEX_COMPILER: lualatex
 #+LATEX_CLASS_OPTIONS: [10pt]
 #+LATEX_HEADER: \usepackage{fontspec}
