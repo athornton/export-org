@@ -1,10 +1,12 @@
 container = athornton/export-org:latest
+target = example
 
 .PHONY: help
 help:
-	@echo "Make targets for export-org example"
-	@echo "make pdf - Make PDF of example"
-	@echo "make reveal - Make Reveal.js version of example"
+	@echo "Make targets for export-org $(target):"
+	@echo ""
+	@echo "make pdf - Make PDF of $(target)"
+	@echo "make reveal - Make Reveal.js version of $(target)"
 	@echo "make site - Make Reveal.js website directory"
 	@echo "make clean - Remove artifacts"
 
@@ -13,29 +15,30 @@ docker-container:
 	docker run --rm $(container) /bin/true || \
 	docker buildx build -t $(container) .
 
-example.pdf: example.org docker-container
-	./exporter.sh pdf example.org
+$(target).pdf: $(target).org docker-container
+	./exporter.sh pdf $(target).org
 
-example.html: example.org docker-container
-	./exporter.sh html example.org
+$(target).html: $(target).org docker-container
+	./exporter.sh html $(target).org
 
-pdf: example.pdf
+pdf: $(target).pdf
 
-html: example.html
+html: $(target).html
 
 site: pdf html
 	@mkdir -p ./site/assets
 	@mkdir -p ./site/css
-	cp example.html ./site/index.html
-	cp example.pdf ./site/example.pdf
-	cp -rp css/local.css ./site/css
-	cp -rp Makefile ./site/assets
-	cp -rp .github/workflows/ci.yaml ./site/assets
-	cp -rp scripts/fix-texlive.bash ./site/assets
+	cp $(target).html ./site/index.html
+	cp $(target).pdf ./site/$(target).pdf
+	cp -rp css/* ./site/css
+	cp -p assets/coffee.png ./site/assets
+	cp -p Makefile ./site/assets
+	cp -p .github/workflows/ci.yaml ./site/assets
+	cp -p scripts/fix-texlive.bash ./site/assets
 
 clean:
-	@rm -rf ./site
-	@rm -f ./example.html
-	@rm -f ./example.pdf
-	@rm -f ./example.tex
-	@docker rmi athornton/export-org
+	-@rm -rf ./site
+	-@rm -f ./$(target).html
+	-@rm -f ./$(target).pdf
+	-@rm -f ./$(target).tex
+	-@docker rmi athornton/export-org

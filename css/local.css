@@ -1,4 +1,9 @@
 .reveal {
+    background-image: url("../assets/coffee.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: bottom left;
+
     font-family: Verdana, Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
     font-size: large;
 }
