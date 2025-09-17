@@ -30,11 +30,11 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h1 class="title">Org-mode export to Reveal.js and PDF</h1><p class="subtitle"></p>
-<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-17 Wed 04:15</p>
+<h2 class="author">Adam Thornton</h2><p class="date">Created: 2025-09-17 Wed 05:36</p>
 </section>
 <section>
-<section id="slide-org4e5ab5a">
-<h2 id="org4e5ab5a">Org-mode export to Reveal.js and PDF</h2>
+<section id="slide-org7394487">
+<h2 id="org7394487">Org-mode export to Reveal.js and PDF</h2>
 <p>
 If you're me, you think better in a text editor than in Powerpoint.
 </p>
@@ -47,8 +47,8 @@ A few years ago I ran across <a href="https://github.com/yjwen/org-reveal">org-r
 It was also pretty manual.
 </p>
 </section>
-<section id="slide-org852248b">
-<h3 id="org852248b">Automating Emacs</h3>
+<section id="slide-orgfe0d1dc">
+<h3 id="orgfe0d1dc">Automating Emacs</h3>
 <p>
 Emacs has had a batch mode forever (as far as I know, anyway).
 </p>
@@ -57,16 +57,16 @@ Emacs has had a batch mode forever (as far as I know, anyway).
 Clever use of <code>--load</code> and <code>--eval</code> let you turn Emacs into a batch transmogrifier.
 </p>
 </section>
-<section id="slide-orgaf856d1">
-<h4 id="orgaf856d1">Why Emacs 30?</h4>
+<section id="slide-org3a81c50">
+<h4 id="org3a81c50">Why Emacs 30?</h4>
 <p>
 Emacs 30 lets you use a shebang to treat eshell just like any other shell script.
 I thought this was going to be useful, but it turned out not to be.
 But if you wondered why this container was built on Debian testing (in September 2025), "Emacs 30" is the answer.
 </p>
 </section>
-<section id="slide-orgc739180">
-<h3 id="orgc739180">Automating artifact generation</h3>
+<section id="slide-org01b090a">
+<h3 id="org01b090a">Automating artifact generation</h3>
 <p>
 In essence all you need to do for Reveal.js is to ensure that org-reveal-mode is available.
 For PDF output you need LaTeX and an org-mode new enough to support LaTeX output.
@@ -76,8 +76,8 @@ For PDF output you need LaTeX and an org-mode new enough to support LaTeX output
 Then you just call the appropriate export function once you've loaded your org document into the buffer.
 </p>
 </section>
-<section id="slide-orge9f0953">
-<h3 id="orge9f0953">Ensuring you have that support</h3>
+<section id="slide-org6e5d8e2">
+<h3 id="org6e5d8e2">Ensuring you have that support</h3>
 <p>
 The problem is, no one's CI runner is going to have Emacs with a new org-mode and org-reveal preloaded.
 </p>
@@ -90,8 +90,8 @@ The obvious thing to do is to build a container with Emacs and a LaTeX setup and
 And the great news is, this has already been (mostly) done by <a href="https://gitlab.com/olberger/docker-org-teaching-export">Olivier Berger</a>.
 </p>
 </section>
-<section id="slide-org13237f5">
-<h4 id="org13237f5">Differences from Berger's work</h4>
+<section id="slide-org4297db0">
+<h4 id="org4297db0">Differences from Berger's work</h4>
 <p>
 Berger uses Emacs with X enabled, because he prefers those fonts, and goes to some trouble to avoid running Emacs in batch mode.
 I don't care: I just get Verdana into the container and set up my PDF export to use it.
@@ -105,8 +105,8 @@ I don't care about "plain" HTML export&#x2013;if I am exporting to HTML, what I 
 I go a little farther and create a GitHub Actions workflow to allow publication straight to GitHub Pages.
 </p>
 </section>
-<section id="slide-orgff2f2fc">
-<h4 id="orgff2f2fc">GitHub Action integration</h4>
+<section id="slide-org57721d8">
+<h4 id="org57721d8">GitHub Action integration</h4>
 <p>
 The trick here is getting both local builds and GitHub Actions to work correctly and cache built containers.
 </p>
@@ -124,8 +124,8 @@ That ensures that, if building locally, you build the container (which is never 
 If building via GitHub Actions, you will at that point have the container because it will have been built or retrieved from cache and then stored in Docker by <code>Build container</code>.
 </p>
 </section>
-<section id="slide-org45a2ecb">
-<h3 id="org45a2ecb">PDF Export</h3>
+<section id="slide-org4f82f62">
+<h3 id="org4f82f62">PDF Export</h3>
 <p>
 Generating PDF output from org-mode is straightforward, at least in the sense that generating LaTeX from org-mode is easy.
 </p>
@@ -144,8 +144,8 @@ Don't look at <a href="./assets/fix-texlive.bash">how to fix up the installed Te
 On the bright side, <a href="./example.pdf">the PDF version</a> looks OK.
 </p>
 </section>
-<section id="slide-org8d05ce9">
-<h3 id="org8d05ce9">Source Code</h3>
+<section id="slide-orgb612dde">
+<h3 id="orgb612dde">Source Code</h3>
 <p>
 This project lives at <a href="https://github.com/athornton/export-org">GitHub</a>.
 </p>

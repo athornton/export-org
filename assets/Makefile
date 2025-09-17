@@ -30,8 +30,8 @@ site: pdf html
 	@mkdir -p ./site/css
 	cp $(target).html ./site/index.html
 	cp $(target).pdf ./site/$(target).pdf
-	cp -rp css/* ./site/css
-	cp -p assets/coffee.png ./site/assets
+	cp -rp css ./site
+	cp -rp assets/coffee.png ./site/assets/coffee.png
 	cp -p Makefile ./site/assets
 	cp -p .github/workflows/ci.yaml ./site/assets
 	cp -p scripts/fix-texlive.bash ./site/assets
